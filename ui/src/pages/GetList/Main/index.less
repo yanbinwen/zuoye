@@ -1,0 +1,140 @@
+.cryptoPriceInfoPage {
+  padding: 24px;
+  background: #f5f7fa;
+  min-height: 100vh;
+
+  .cardTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+
+    h2 {
+      color: #1f2937;
+      font-weight: 600;
+      font-size: 24px;
+      margin: 0;
+    }
+
+    .ant-btn-primary {
+      background: #1677ff;
+      border: none;
+      box-shadow: 0 2px 8px rgba(22, 119, 255, 0.3);
+      transition: all 0.3s ease;
+      font-weight: 500;
+
+      &:hover {
+        background: #4096ff;
+        box-shadow: 0 4px 12px rgba(22, 119, 255, 0.4);
+      }
+    }
+
+    .refresh-tips {
+      color: #666666 !important;
+      font-size: 14px;
+    }
+  }
+
+  .ant-card {
+    background: #ffffff;
+    border: 1px solid #e8e8e8;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: all 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .table {
+    margin-top: 20px;
+
+    .ant-table-wrapper {
+      background: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+
+      .ant-table {
+        background: transparent;
+
+        .ant-table-thead > tr > th {
+          background: #fafafa;
+          color: #333333;
+          font-weight: 600;
+          border-bottom: 1px solid #e8e8e8;
+          padding: 16px;
+        }
+
+        .ant-table-tbody > tr {
+          transition: all 0.2s ease;
+
+          &:hover {
+            background: #fafafa;
+          }
+
+          & > td {
+            color: #333333;
+            border-bottom: 1px solid #f0f0f0;
+            padding: 16px;
+          }
+        }
+      }
+
+      .ant-table-pagination {
+        margin-top: 24px;
+        padding-right: 16px;
+
+        .ant-pagination-item {
+          background: #ffffff;
+          border-color: #d9d9d9;
+
+          a {
+            color: #333333;
+          }
+
+          &.ant-pagination-item-active {
+            background: #1677ff;
+            border-color: #1677ff;
+
+            a {
+              color: #ffffff;
+            }
+          }
+
+          &:hover:not(.ant-pagination-item-active) {
+            border-color: #1677ff;
+
+            a {
+              color: #1677ff;
+            }
+          }
+        }
+
+        .ant-pagination-prev,
+        .ant-pagination-next {
+          .ant-pagination-item-link {
+            background: #ffffff;
+            border-color: #d9d9d9;
+            color: #333333;
+
+            &:hover {
+              border-color: #1677ff;
+              color: #1677ff;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /* 奇偶行交替颜色 */
+  .even-row {
+    background-color: #ffffff;
+  }
+
+  .odd-row {
+    background-color: #fafafa;
+  }
+}

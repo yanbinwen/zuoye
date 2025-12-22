@@ -1,0 +1,202 @@
+.coin-fall-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.coin {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0;
+  animation: fall linear infinite;
+  transform: translateX(-50%);
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-100px) translateX(-50%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) translateX(-50%);
+    opacity: 0;
+  }
+}
+
+// 定义不同硬币的背景图片
+.coin-btc {
+  background-image: url('/icons/Bite.png');
+}
+
+.coin-eth {
+  background-image: url('/icons/Ete.png');
+}
+
+.coin-usdt {
+  background-image: url('/icons/Usdt.png');
+}
+
+.coin-jke {
+  background-image: url('/icons/Jke.png');
+}
+
+.coin-usdc {
+  background-image: url('/icons/USDC.png');
+}
+
+// 为不同硬币设置动画延迟和持续时间
+.coin:nth-child(1) {
+  left: 5%;
+  animation-delay: 0s;
+  animation-duration: 5s;
+}
+
+.coin:nth-child(2) {
+  left: 10%;
+  animation-delay: 0.5s;
+  animation-duration: 6s;
+}
+
+.coin:nth-child(3) {
+  left: 15%;
+  animation-delay: 1s;
+  animation-duration: 7s;
+}
+
+.coin:nth-child(4) {
+  left: 20%;
+  animation-delay: 1.5s;
+  animation-duration: 8s;
+}
+
+.coin:nth-child(5) {
+  left: 25%;
+  animation-delay: 2s;
+  animation-duration: 5s;
+}
+
+.coin:nth-child(6) {
+  left: 30%;
+  animation-delay: 2.5s;
+  animation-duration: 6s;
+}
+
+.coin:nth-child(7) {
+  left: 35%;
+  animation-delay: 3s;
+  animation-duration: 7s;
+}
+
+.coin:nth-child(8) {
+  left: 40%;
+  animation-delay: 3.5s;
+  animation-duration: 8s;
+}
+
+.coin:nth-child(9) {
+  left: 45%;
+  animation-delay: 4s;
+  animation-duration: 5s;
+}
+
+.coin:nth-child(10) {
+  left: 50%;
+  animation-delay: 4.5s;
+  animation-duration: 6s;
+}
+
+.coin:nth-child(11) {
+  left: 55%;
+  animation-delay: 5s;
+  animation-duration: 7s;
+}
+
+.coin:nth-child(12) {
+  left: 60%;
+  animation-delay: 5.5s;
+  animation-duration: 8s;
+}
+
+.coin:nth-child(13) {
+  left: 65%;
+  animation-delay: 6s;
+  animation-duration: 5s;
+}
+
+.coin:nth-child(14) {
+  left: 70%;
+  animation-delay: 6.5s;
+  animation-duration: 6s;
+}
+
+.coin:nth-child(15) {
+  left: 75%;
+  animation-delay: 7s;
+  animation-duration: 7s;
+}
+
+.coin:nth-child(16) {
+  left: 80%;
+  animation-delay: 7.5s;
+  animation-duration: 8s;
+}
+
+.coin:nth-child(17) {
+  left: 85%;
+  animation-delay: 8s;
+  animation-duration: 5s;
+}
+
+.coin:nth-child(18) {
+  left: 90%;
+  animation-delay: 8.5s;
+  animation-duration: 6s;
+}
+
+.coin:nth-child(19) {
+  left: 95%;
+  animation-delay: 9s;
+  animation-duration: 7s;
+}
+
+.coin:nth-child(20) {
+  left: 100%;
+  animation-delay: 9.5s;
+  animation-duration: 8s;
+}
+
+// 随机选择硬币类型
+.coin:nth-child(5n+1) {
+  background-image: url('/icons/Bite.png');
+}
+
+.coin:nth-child(5n+2) {
+  background-image: url('/icons/Ete.png');
+}
+
+.coin:nth-child(5n+3) {
+  background-image: url('/icons/Usdt.png');
+}
+
+.coin:nth-child(5n+4) {
+  background-image: url('/icons/Jke.png');
+}
+
+.coin:nth-child(5n+5) {
+  background-image: url('/icons/Usdc.png');
+}

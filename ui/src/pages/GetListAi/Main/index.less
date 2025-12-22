@@ -1,0 +1,845 @@
+.userCryptoPurchasesPage {
+  padding: 24px;
+  min-height: 100vh;
+  background: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333333;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  overflow-x: hidden;
+
+  .card {
+    margin-bottom: 32px;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    z-index: 1;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #667eea, #764ba2, #667eea);
+      background-size: 200% 100%;
+      animation: gradientFlow 3s linear infinite;
+      z-index: 2;
+    }
+    
+    &:hover {
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4);
+      transform: translateY(-2px);
+      border-color: rgba(102, 126, 234, 0.4);
+    }
+  }
+  
+  @keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding: 20px 24px;
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  // 获取推荐按钮样式
+  .recommendationButton {
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%) !important;
+      border-color: #ff9a9e !important;
+      color: #ffffff !important;
+    }
+  }
+
+  .title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+    color: #333333;
+  }
+
+  .buttonGroup {
+    display: flex;
+    gap: 16px;
+  }
+
+  .table {
+    margin-bottom: 24px;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 32px;
+  }
+
+  .modalContent {
+    max-height: 70vh;
+    overflow-y: auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+  }
+
+  .formItem {
+    margin-bottom: 28px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .ant-form-item-label > label {
+      font-weight: 600;
+      color: #2c3e50;
+      font-size: 14px;
+    }
+  }
+
+  .recommendationCard {
+    margin-top: 32px;
+    border: 1px solid rgba(255, 154, 158, 0.3);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    background: #ffffff;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      box-shadow: 0 15px 48px rgba(255, 154, 158, 0.3);
+      transform: translateY(-4px);
+      border-color: rgba(255, 154, 158, 0.5);
+    }
+
+    .recommendationHeader {
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+      padding: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at 100% 100%, rgba(255,255,255,0.15) 0%, transparent 60%);
+      }
+    }
+
+    .recommendationTitle {
+      margin: 0;
+      color: #ffffff;
+      font-size: 22px;
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+
+    .recommendationContent {
+      padding: 28px;
+    }
+
+    .recommendationList {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .recommendationItem {
+      padding: 24px;
+      border: 2px solid rgba(255, 154, 158, 0.2);
+      border-radius: 16px;
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      background: #ffffff;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+      
+      /* 微型价格走势图背景 */
+      &::after {
+        content: '';
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 60px;
+        height: 30px;
+        background: linear-gradient(135deg, #ff9a9e, #fecfef);
+        opacity: 0.1;
+        border-radius: 4px;
+        clip-path: polygon(0% 70%, 10% 50%, 20% 60%, 30% 40%, 40% 50%, 50% 30%, 60% 40%, 70% 20%, 80% 30%, 90% 10%, 100% 20%);
+      }
+
+      &:hover {
+        border-color: #ff9a9e;
+        box-shadow: 0 12px 32px rgba(255, 154, 158, 0.3);
+        transform: translateY(-3px);
+        background: #ffffff;
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.4s ease;
+      }
+
+      &:hover::before {
+        transform: scaleX(1);
+      }
+    }
+
+    .recommendationItemTitle {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #333333;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .recommendationItemPrice {
+      color: #ff9a9e;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.3s ease;
+      
+      &::before {
+        content: '$';
+        font-size: 16px;
+        opacity: 0.8;
+      }
+    }
+
+    .recommendationItemChange {
+      font-size: 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+
+    .positiveChange {
+      color: #52c41a;
+      background-color: rgba(82, 196, 26, 0.1);
+      animation: pulseGreen 2s infinite;
+
+      &::before {
+        content: '↑';
+        font-size: 16px;
+      }
+    }
+
+    .negativeChange {
+      color: #ff4d4f;
+      background-color: rgba(255, 77, 79, 0.1);
+      animation: pulseRed 2s infinite;
+
+      &::before {
+        content: '↓';
+        font-size: 16px;
+      }
+    }
+
+    .buyButton {
+      margin-top: 20px;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+      border: none;
+      color: white;
+      padding: 12px 28px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+      box-shadow: 0 4px 16px rgba(255, 154, 158, 0.3);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 154, 158, 0.4);
+        background: linear-gradient(135deg, #ff8a8e 0%, #fedfef 100%);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+  }
+
+  .ant-btn {
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border-radius: 10px;
+    padding: 10px 24px;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+    border: none;
+    
+    // 按钮内部发光效果
+    &::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+      transform: rotate(45deg);
+      transition: all 0.6s ease;
+      opacity: 0;
+    }
+    
+    &:hover::before {
+      animation: shimmer 1.5s infinite;
+    }
+    
+    &.ant-btn-primary {
+        background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+        box-shadow: 0 4px 16px rgba(255, 154, 158, 0.3), 0 0 0 1px rgba(255, 154, 158, 0.2);
+        
+        &:hover {
+          background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4), 0 0 40px rgba(102, 126, 234, 0.3);
+        }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+
+    &.ant-btn-danger {
+      background: linear-gradient(135deg, #ff6b6b, #ee5a5a);
+      border: none;
+      box-shadow: 0 4px 16px rgba(255, 107, 107, 0.3);
+
+      &:hover {
+        background: linear-gradient(135deg, #ff5252, #ff3838);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4), 0 0 30px rgba(255, 107, 107, 0.2);
+      }
+    }
+  }
+  
+  // 按钮闪烁动画
+  @keyframes shimmer {
+    0% {
+      left: -100%;
+      opacity: 0;
+    }
+    50% {
+      opacity: 0.6;
+    }
+    100% {
+      left: 100%;
+      opacity: 0;
+    }
+  }
+
+  .ant-pagination {
+    &.ant-pagination-simple .ant-pagination-simple-pager input {
+      border-radius: 8px;
+      border: 2px solid #e8f4ff;
+      transition: all 0.3s ease;
+
+      &:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      }
+    }
+    
+    .ant-pagination-item {
+      border-radius: 8px;
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        border-color: #667eea;
+        transform: translateY(-1px);
+      }
+      
+      &.ant-pagination-item-active {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        border-color: transparent;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 16px rgba(102, 126, 234, 0.4);
+        
+        a {
+          color: white;
+          font-weight: 600;
+        }
+      }
+    }
+
+    .ant-pagination-prev,
+    .ant-pagination-next {
+      transition: all 0.3s ease;
+
+      &:hover .ant-pagination-item-link {
+        border-color: #667eea;
+        color: #667eea;
+      }
+    }
+  }
+
+  .ant-table {
+    .ant-table-thead > tr > th {
+      background: linear-gradient(135deg, rgba(30, 35, 55, 0.95), rgba(26, 32, 44, 0.95));
+      font-weight: 700;
+      color: #ffffff;
+      font-size: 14px;
+      padding: 20px 16px;
+      border-bottom: 2px solid rgba(102, 126, 234, 0.3);
+      position: relative;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        left: 16px;
+        right: 16px;
+        bottom: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.6), transparent);
+        animation: shimmer 2s infinite;
+      }
+    }
+    
+    .ant-table-tbody > tr {
+      transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      position: relative;
+      
+      &:hover {
+        background: rgba(102, 126, 234, 0.08);
+        transform: translateX(4px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      }
+      
+      &:hover > td {
+        color: #667eea;
+        font-weight: 500;
+      }
+
+      & > td {
+        padding: 20px 16px;
+        font-size: 14px;
+        color: #e0e6ed;
+        transition: all 0.3s ease;
+        position: relative;
+        border-right: 1px solid rgba(255, 255, 255, 0.03);
+        
+        &:last-child {
+          border-right: none;
+        }
+      }
+      
+      /* 奇偶行交替效果 */
+      &:nth-child(even) {
+        background: rgba(255, 255, 255, 0.01);
+      }
+    }
+
+    .ant-table-row:last-child {
+      border-bottom: none;
+    }
+    
+    // 添加表格分隔线
+    .ant-table-body {
+      border-left: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .ant-table-thead > tr > th,
+    .ant-table-tbody > tr > td {
+      border-right: 1px solid rgba(255, 255, 255, 0.05);
+    }
+  }
+
+  .ant-modal {
+    .ant-modal-content {
+      border-radius: 16px;
+      border: none;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+    }
+
+    .ant-modal-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 20px 24px;
+
+      .ant-modal-title {
+        color: white;
+        font-size: 18px;
+        font-weight: 700;
+      }
+
+      .ant-modal-close {
+        color: rgba(255, 255, 255, 0.8);
+
+        &:hover {
+          color: white;
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+      }
+    }
+
+    .ant-modal-footer {
+      padding: 20px 24px;
+      border-top: 1px solid #f0f0f0;
+    }
+  }
+
+  .ant-select,
+  .ant-input-number {
+    width: 100%;
+
+    & .ant-select-selector,
+    & .ant-input-number-handler-wrap {
+      border-radius: 8px;
+      border: 2px solid #e8f4ff;
+      transition: all 0.3s ease;
+
+      &:hover {
+        border-color: #667eea;
+      }
+
+      &:focus-within {
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      }
+    }
+  }
+
+  @keyframes gradientBG {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  @keyframes pulseGreen {
+    0% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes pulseRed {
+    0% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  // 字体样式类 - 加密货币金融主题
+  .fontStyles {
+    // 标题样式
+    .title {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.05em;
+      color: #ffffff;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    .subtitle {
+      font-size: 22px;
+      font-weight: 600;
+      line-height: 1.3;
+      color: #ffffff;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+    
+    // 正文样式
+    .body {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.6;
+      color: #d0d5dd;
+    }
+    
+    .small {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #9ca3af;
+    }
+    
+    // 特殊文本样式 - 加密货币名称
+    .emphasis {
+      font-weight: 700;
+      color: #667eea;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      font-size: 14px;
+      position: relative;
+      padding: 0 4px;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #667eea, transparent);
+        animation: shimmer 2s infinite;
+      }
+    }
+    
+    // 数字和价格样式 - 金融主题
+    .price {
+      font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+      font-weight: 700;
+      color: #ffffff;
+      font-size: 15px;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+      
+      // 价格变动动画
+      &.up {
+        color: #00ff88;
+        text-shadow: 0 1px 3px rgba(0, 255, 136, 0.5);
+      }
+      
+      &.down {
+        color: #ff4d4f;
+        text-shadow: 0 1px 3px rgba(255, 77, 79, 0.5);
+      }
+    }
+    
+    // 按钮文本样式
+    .button {
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 14px;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  // 响应式设计 - 平板
+  @media (max-width: 768px) {
+    padding: 16px;
+
+    .header {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .buttonGroup {
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .pagination {
+      justify-content: center;
+      margin-top: 24px;
+    }
+
+    .title {
+      font-size: 24px;
+      text-align: center;
+    }
+
+    .recommendationList {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .recommendationItem {
+      padding: 20px;
+    }
+
+    .ant-btn {
+      padding: 8px 20px;
+      font-size: 13px;
+    }
+
+    .recommendationContent {
+      padding: 20px;
+    }
+
+    .ant-table {
+      .ant-table-thead > tr > th,
+      .ant-table-tbody > tr > td {
+        padding: 12px 8px;
+        font-size: 13px;
+      }
+    }
+    
+    // 字体响应式调整 - 平板
+    .fontStyles {
+      .title {
+        font-size: 24px;
+      }
+      
+      .subtitle {
+        font-size: 20px;
+      }
+      
+      .body {
+        font-size: 15px;
+      }
+      
+      .small {
+        font-size: 13px;
+      }
+      
+      .button {
+        font-size: 13px;
+      }
+    }
+  }
+
+  // 响应式设计 - 手机
+  @media (max-width: 480px) {
+    padding: 12px;
+
+    .card {
+      border-radius: 12px;
+    }
+
+    .title {
+      font-size: 20px;
+    }
+
+    .recommendationContent {
+      padding: 16px;
+    }
+
+    .recommendationItem {
+      padding: 16px;
+      border-radius: 12px;
+    }
+
+    .recommendationItemTitle {
+      font-size: 18px;
+    }
+
+    .recommendationItemPrice {
+      font-size: 20px;
+    }
+
+    .ant-btn {
+      padding: 8px 16px;
+      font-size: 13px;
+    }
+
+    .buyButton {
+      width: 100%;
+      padding: 12px;
+    }
+
+    .ant-modal {
+      .ant-modal-content {
+        border-radius: 12px;
+      }
+
+      .ant-modal-header,
+      .ant-modal-footer {
+        padding: 16px 20px;
+      }
+    }
+    
+    // 字体响应式调整 - 手机
+    .fontStyles {
+      .title {
+        font-size: 20px;
+      }
+      
+      .subtitle {
+        font-size: 18px;
+      }
+      
+      .body {
+        font-size: 14px;
+      }
+      
+      .small {
+        font-size: 12px;
+      }
+      
+      .button {
+        font-size: 13px;
+      }
+    }
+  }
+}
+
